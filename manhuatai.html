@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {width: 800px;height: auto;margin: 0 auto;}
+        body{
+            margin:50px;
+            background-color:#2C3437;
+            text-align:center;
+        }
+        .content{
+            color: #0000FF
+        }
+        .head{
+            color: greenyellow;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="topAnchor"></div>
+    <div class="head">
+    <h1>漫画地址</h1>
+    <h3><p >sample:&nbsp;&nbsp;http://mhpic.mh51.com/comic/D/斗罗大陆拆分版/65话
+        <p>两个空格不用斜杠,第一个默认地址 一般不用改</p>
+    </div>
+
+    <div class="content">
+        <input class="content" style="width: 200px" id="domain" type="text" width="auto" value="http://mhpic.mh51.com/comic/D/"/>
+        <input class="content" id="dir" type="text" placeholder="xxoo漫画拆分版" />
+        <input class="content" id="page" type="text" placeholder="看到了第几话了- -！" />
+        <input class="content" type="button" value="拼接url" onclick="geturl()"/>
+        <input class="content" type="button" value="获得当前图片" onclick="getpictrue()"/>
+    </div>
+
+    <div id="new">
+        <div id="box"></div>
+    </div>
+
+    <div id="img" class="box">
+
+    </div>
+
+    <script type="text/javascript" >
+        function getvalue(){
+            var v1 = document.getElementById('domain').value;
+            var v2 = document.getElementById('dir').value;
+            var v3 = document.getElementById('page').value;
+            var n = v3.replace(/[^0-9]/g,'');
+            var strs = new Array(v1,v2,v3,n);
+            return strs;
+        }
+
+        function geturl() {
+            var data = getvalue();
+            var url = data[0] + data[1] + "/" +data[2] + "/"  + "1.jpg-mht.middle";
+            document.getElementById('box').innerText= url;
+            //generate input lable
+            var tag = document.createElement('input');
+            tag.setAttribute('type','button');
+            tag.setAttribute('value','下一话');
+            tag.setAttribute('id','next');
+            tag.setAttribute('onclick','next();');
+            document.getElementById('new').appendChild(tag);
+        }
+
+        function getpictrue() {
+            var v = document.getElementById('box').innerText;
+            //generate img lable
+            for (var i=1;i<=6;i++){
+                var im = document.createElement('img');
+                im.setAttribute('id',i);
+
+                var s = i + ".jpg-mht.middle";
+                var vs = v.split('/');
+                vs.splice(7,1,s);
+                im.setAttribute('src',vs.join('/'));
+                document.getElementById('img').appendChild(im);
+            }
+        }
+
+        function next() {
+            var v = document.getElementById('box').innerText;
+            var pn = v.split('/')[6].replace(/[^0-9]/g, '');
+                pn = Number(pn) +1;
+            var spn = pn + "话";
+            document.getElementById('img').innerHTML = '';
+
+            for (var i = 1; i <= 6; i++) {
+                var im = document.createElement('img');
+                im.setAttribute('id', i);
+
+                var s = i + ".jpg-mht.middle";
+                var vs = v.split('/');
+                vs.splice(7, 1, s);
+                vs.splice(6, 1, spn);
+                im.setAttribute('src', vs.join('/'));
+                document.getElementById('img').appendChild(im);
+            }
+            document.getElementById('box').innerText=vs.join('/');
+        }
+
+    </script>
+
+        <a href="#topAnchor" style="position:fixed;right:0;bottom:0">回到顶部</a>
+</body>
+</html>
