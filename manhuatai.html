@@ -39,6 +39,7 @@
     <div id="new">
         <div id="box"></div>
     </div>
+    <div id="gnext"></div>
 
     <div id="img" class="box">
 
@@ -55,21 +56,24 @@
         }
 
         function geturl() {
+            if (document.getElementById('gnext')){
+                document.getElementById('gnext').innerHTML='';
+            }
             var data = getvalue();
             var url = data[0] + data[1] + "/" +data[2] + "/"  + "1.jpg-mht.middle";
             document.getElementById('box').innerText= url;
-            //generate input lable
+            //generate input
             var tag = document.createElement('input');
             tag.setAttribute('type','button');
             tag.setAttribute('value','下一话');
             tag.setAttribute('id','next');
             tag.setAttribute('onclick','next();');
-            document.getElementById('new').appendChild(tag);
+            document.getElementById('gnext').appendChild(tag);
         }
 
         function getpictrue() {
             var v = document.getElementById('box').innerText;
-            //generate img lable
+            //generate img
             for (var i=1;i<=6;i++){
                 var im = document.createElement('img');
                 im.setAttribute('id',i);
