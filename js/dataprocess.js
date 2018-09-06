@@ -48,7 +48,7 @@ function next() {
     var spn = pn + "话";
     document.getElementById('img').innerHTML = '';
 
-    for (var i=1;i<=9;i++) {
+    for (var i=1;i<=12;i++) {
         var im = document.createElement('img');
         im.setAttribute('id', i);
 
